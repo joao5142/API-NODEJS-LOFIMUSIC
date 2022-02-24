@@ -2,14 +2,14 @@ import { validate } from "uuid";
 import { Music } from "../model/Music";
 import { User } from "../model/User";
 import {
-  ICreateUserTDO,
+  ICreateUserDTO,
   IUserRepository,
-  ICreateFavoriteSongTDO,
-  IDeleteUserTDO,
-  IFindUserTDO,
-  IUpdateUserTDO,
-  IDeleteFavoriteMusicTDO,
-  IDeleteMusicAllUsersTDO,
+  ICreateFavoriteSongDTO,
+  IDeleteUserDTO,
+  IFindUserDTO,
+  IUpdateUserDTO,
+  IDeleteFavoriteMusicDTO,
+  IDeleteMusicAllUsersDTO,
   IUpdateAllMusicsTDDO,
 } from "./IUserRepository";
 
@@ -36,7 +36,7 @@ class UserRepository implements IUserRepository {
       });
     });
   }
-  deleteFavoriteMusic({ user_id, music_id }: IDeleteFavoriteMusicTDO): void {
+  deleteFavoriteMusic({ user_id, music_id }: IDeleteFavoriteMusicDTO): void {
     if (!validate(user_id)) {
       throw new Error("User id is not a valide uuid");
     }
@@ -61,7 +61,7 @@ class UserRepository implements IUserRepository {
       (music) => music.id != music_id
     );
   }
-  update({ user_id, username, email, password }: IUpdateUserTDO): void {
+  update({ user_id, username, email, password }: IUpdateUserDTO): void {
     if (!validate(user_id)) {
       throw new Error("Id is not a valide uuid");
     }
@@ -78,7 +78,7 @@ class UserRepository implements IUserRepository {
     });
   }
 
-  addFavoriteSong({ music, user_id }: ICreateFavoriteSongTDO): void {
+  addFavoriteSong({ music, user_id }: ICreateFavoriteSongDTO): void {
     if (!validate(user_id)) {
       throw new Error("Id is not a valide uuid!");
     }
@@ -90,7 +90,7 @@ class UserRepository implements IUserRepository {
     user.favorite_songs.push(music);
   }
 
-  findByName({ username }: IFindUserTDO): User {
+  findByName({ username }: IFindUserDTO): User {
     const user = this.users.find((user) => user.username === username);
 
     return user;
@@ -98,7 +98,7 @@ class UserRepository implements IUserRepository {
   getAll(): User[] {
     return this.users;
   }
-  create({ username, email, password }: ICreateUserTDO): void {
+  create({ username, email, password }: ICreateUserDTO): void {
     const user = new User();
 
     Object.assign(user, {
@@ -112,7 +112,7 @@ class UserRepository implements IUserRepository {
 
     this.users.push(user);
   }
-  delete({ user_id }: IDeleteUserTDO): void {
+  delete({ user_id }: IDeleteUserDTO): void {
     if (!validate(user_id)) {
       throw new Error("Id is not a valide uuid");
     }
@@ -120,7 +120,7 @@ class UserRepository implements IUserRepository {
 
     this.users = filtredArray;
   }
-  deleteMusicAllUsers({ music_id }: IDeleteMusicAllUsersTDO): void {
+  deleteMusicAllUsers({ music_id }: IDeleteMusicAllUsersDTO): void {
     this.users.forEach((user) => {
       user.favorite_songs = user.favorite_songs.filter(
         (music) => music.id !== music_id

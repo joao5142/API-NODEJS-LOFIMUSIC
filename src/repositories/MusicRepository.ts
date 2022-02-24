@@ -1,11 +1,11 @@
 import { Music } from "../model/Music";
 import {
-  ICreateMusicTDO,
-  IFindByIdTDO,
-  IFindByNameTDO,
+  ICreateMusicDTO,
+  IFindByIdDTO,
+  IFindByNameDTO,
   IMusicRepository,
-  IUpdateMusicTDO,
-  IDeleteMusicTDO,
+  IUpdateMusicDTO,
+  IDeleteMusicDTO,
 } from "./IMusicRepository";
 import { validate } from "uuid";
 import { UserRepository } from "./UserRepository";
@@ -15,7 +15,7 @@ export class MusicRepository implements IMusicRepository {
   constructor() {
     this.musics = [];
   }
-  delete({ id }: IDeleteMusicTDO): void {
+  delete({ id }: IDeleteMusicDTO): void {
     if (!validate(id)) {
       throw new Error("Id is not a valide uuid!");
     }
@@ -25,7 +25,7 @@ export class MusicRepository implements IMusicRepository {
     }
     this.musics = this.musics.filter((music) => music.id != id);
   }
-  update({ id, name, duration, author }: IUpdateMusicTDO): void {
+  update({ id, name, duration, author }: IUpdateMusicDTO): void {
     if (!validate(id)) {
       throw new Error("Id is not  a valide uuid!");
     }
@@ -39,12 +39,12 @@ export class MusicRepository implements IMusicRepository {
       author,
     });
   }
-  findByName({ name }: IFindByNameTDO): Music {
+  findByName({ name }: IFindByNameDTO): Music {
     const music = this.musics.find((music) => music.name === name);
 
     return music;
   }
-  findById({ id }: IFindByIdTDO): Music {
+  findById({ id }: IFindByIdDTO): Music {
     if (!validate(id)) {
       throw new Error("Id is not  a valide uuid!");
     }
@@ -52,7 +52,7 @@ export class MusicRepository implements IMusicRepository {
 
     return music;
   }
-  create({ name, duration, author }: ICreateMusicTDO): void {
+  create({ name, duration, author }: ICreateMusicDTO): void {
     const music = new Music();
 
     Object.assign(music, { name, duration, author, created_at: new Date() });

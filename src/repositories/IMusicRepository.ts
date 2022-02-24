@@ -1,39 +1,39 @@
 import { Music } from "../model/Music";
 
-interface ICreateMusicTDO {
+interface ICreateMusicDTO {
   name: string;
   author: string;
   duration: string;
 }
-interface IFindByIdTDO {
+interface IFindByIdDTO {
   id: string;
 }
-interface IFindByNameTDO {
+interface IFindByNameDTO {
   name: string;
 }
-interface IDeleteMusicTDO {
+interface IDeleteMusicDTO {
   id: string;
 }
-interface IUpdateMusicTDO {
+interface IUpdateMusicDTO {
   id: string;
   name: string;
   duration: string;
   author: string;
 }
 interface IMusicRepository {
-  findById({ id }: IFindByIdTDO): Music;
-  findByName({ name }: IFindByNameTDO): Music;
-  create({ name, duration, author }: ICreateMusicTDO): void;
-  delete({ id }: IDeleteMusicTDO): void;
-  update({ id, name, duration, author }: IUpdateMusicTDO): void;
+  findById({ id }: IFindByIdDTO): Music;
+  findByName({ name }: IFindByNameDTO): Music;
+  create({ name, duration, author }: ICreateMusicDTO): void;
+  delete({ id }: IDeleteMusicDTO): void;
+  update({ id, name, duration, author }: IUpdateMusicDTO): void;
   getAll(): Music[];
 }
 
 export {
   IMusicRepository,
-  ICreateMusicTDO,
-  IFindByNameTDO,
-  IFindByIdTDO,
-  IUpdateMusicTDO,
-  IDeleteMusicTDO,
+  ICreateMusicDTO,
+  IFindByNameDTO,
+  IFindByIdDTO,
+  IUpdateMusicDTO,
+  IDeleteMusicDTO,
 };

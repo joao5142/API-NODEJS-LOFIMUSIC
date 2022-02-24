@@ -1,34 +1,34 @@
 import { Music } from "../model/Music";
 import { User } from "../model/User";
 
-interface ICreateUserTDO {
+interface ICreateUserDTO {
   username: string;
   email: string;
   password: string;
 }
-interface ICreateFavoriteSongTDO {
+interface ICreateFavoriteSongDTO {
   user_id: string;
   music: Music;
 }
 
-interface IUpdateUserTDO {
+interface IUpdateUserDTO {
   user_id: string;
   username: string;
   email: string;
   password: string;
 }
 
-interface IDeleteUserTDO {
+interface IDeleteUserDTO {
   user_id: string;
 }
-interface IFindUserTDO {
+interface IFindUserDTO {
   username: string;
 }
-interface IDeleteFavoriteMusicTDO {
+interface IDeleteFavoriteMusicDTO {
   user_id: string;
   music_id: string;
 }
-interface IDeleteMusicAllUsersTDO {
+interface IDeleteMusicAllUsersDTO {
   music_id: string;
 }
 interface IUpdateAllMusicsTDDO {
@@ -39,14 +39,14 @@ interface IUpdateAllMusicsTDDO {
 }
 
 interface IUserRepository {
-  findByName({ username }: IFindUserTDO): User;
+  findByName({ username }: IFindUserDTO): User;
   getAll(): User[];
-  create({ username, email, password }: ICreateUserTDO);
-  addFavoriteSong({ music, user_id }: ICreateFavoriteSongTDO);
-  delete({ user_id }: IDeleteUserTDO);
-  update({ user_id, username, email, password }: IUpdateUserTDO);
-  deleteFavoriteMusic({ user_id, music_id }: IDeleteFavoriteMusicTDO);
-  deleteMusicAllUsers({ music_id }: IDeleteMusicAllUsersTDO);
+  create({ username, email, password }: ICreateUserDTO);
+  addFavoriteSong({ music, user_id }: ICreateFavoriteSongDTO);
+  delete({ user_id }: IDeleteUserDTO);
+  update({ user_id, username, email, password }: IUpdateUserDTO);
+  deleteFavoriteMusic({ user_id, music_id }: IDeleteFavoriteMusicDTO);
+  deleteMusicAllUsers({ music_id }: IDeleteMusicAllUsersDTO);
   updateAllMusics({
     music_id,
     name,
@@ -57,12 +57,12 @@ interface IUserRepository {
 
 export {
   IUserRepository,
-  ICreateUserTDO,
-  ICreateFavoriteSongTDO,
-  IDeleteUserTDO,
-  IFindUserTDO,
-  IUpdateUserTDO,
-  IDeleteFavoriteMusicTDO,
-  IDeleteMusicAllUsersTDO,
+  ICreateUserDTO,
+  ICreateFavoriteSongDTO,
+  IDeleteUserDTO,
+  IFindUserDTO,
+  IUpdateUserDTO,
+  IDeleteFavoriteMusicDTO,
+  IDeleteMusicAllUsersDTO,
   IUpdateAllMusicsTDDO,
 };

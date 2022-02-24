@@ -1,8 +1,4 @@
 import { v4 as uuid } from "uuid";
-import {
-  ICreateUserTDO,
-  IUserRepository,
-} from "../repositories/IUserRepository";
 import { Music } from "./Music";
 
 export class User {
