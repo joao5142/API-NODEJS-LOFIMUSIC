@@ -1,8 +1,5 @@
 import { Music } from "../model/Music";
-import {
-  ICreateMusicTDO,
-  IMusicRepository,
-} from "../repositories/IMusicRepository";
+import { IMusicRepository } from "../repositories/IMusicRepository";
 
 interface IRequest {
   name: string;
